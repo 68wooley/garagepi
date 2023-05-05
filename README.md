@@ -11,7 +11,9 @@ garage is received.
 Relay 1 is on BCM Pin 17, blue and red wires
 
 Build for 32 bit: env GOOS=linux GOARCH=arm GOARM=7 go build
+
 Build for 64 bit: env GOOS=linux GOARCH=arm64 go build
+
 Build with debug symbols: env GOOS=linux GOARCH=arm64 go build -gcflags=all=-N -l -o garagepi_debug
 
 Note - delve debugger only works on arm64 so need it to do interactive debugging. See tasks.json and config.json
