@@ -1,0 +1,11 @@
+{
+    "DEBUG": true,
+    "LOGFILE": "/home/graeme/garagepi/garagepi.log",
+    "PIDFILE": "garagepipidfile",
+    "SERVICEPORT": "9002",
+    "PROXYURL": "",
+    "BUTTON1GPIOPIN": "17",
+    "BUTTON2GPIOPIN": "17",
+    "BUTTON1PRESSDURATION": "2",
+    "BUTTON2PRESSDURATION": "2"
+}

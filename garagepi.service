@@ -1,0 +1,15 @@
+[Unit]
+Description=GaragePI Marantec GarageDoor Opener extension for Homebridge myQ plugin 
+After=network.target
+StartLimitIntervalSec=0
+ 
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=graeme
+WorkingDirectory=/opt/garagepi
+ExecStart=/opt/garagepi/garagepi
+ 
+[Install]
+WantedBy=multi-user.target
