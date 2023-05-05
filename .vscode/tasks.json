@@ -1,0 +1,59 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "go: build (ARM64 (RPi))",
+            "type": "shell",
+            "command": "go",
+            "args": [
+                "build",
+                "-gcflags=all=-N -l",
+                "-o",
+                "${fileDirname}/garagepi_debug"
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+                "env": {"GOOS": "linux", "GOARCH": "arm64"}
+            },
+        },
+        {
+            "label": "scp: copy to RPI (ARM64 (RPi))",
+            "type": "shell",
+            "command": "scp",
+            "args": [
+                "garagepi_debug",
+                "graeme@10.0.0.212:/home/graeme/garagepi"
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+            },
+            "dependsOn": "go: build (ARM64 (RPi))"
+        },
+        {
+            "label": "scp: copy Config to RPI (ARM64 (RPi))",
+            "type": "shell",
+            "command": "scp",
+            "args": [
+                "config.json",
+                "graeme@10.0.0.212:/home/graeme/garagepi"
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+            },
+            "dependsOn": "scp: copy to RPI (ARM64 (RPi))"
+        },
+        {
+            "label": "remote start delve",
+            "type": "shell",
+            "command": "ssh",
+            "args": [
+                "graeme@10.0.0.212",
+                "screen -d -m dlv dap --listen=:12345"
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+            },
+            "dependsOn": "scp: copy Config to RPI (ARM64 (RPi))"
+        }
+    ]
+}
